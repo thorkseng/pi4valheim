@@ -6,12 +6,17 @@ Raspberry Pi4: I only tested on a 8GB of RAM with the next requirements:
 - [RaspianOs 64 Bits](https://downloads.raspberrypi.org/raspios_arm64/images/raspios_arm64-2020-05-28/) updated.
 - Upgrade the distribution to Debian BullsEye (change the repositories to):
 
-    deb http://deb.debian.org/debian           bullseye main contrib non-free
-    deb http://deb.debian.org/debian-security/ bullseye-security main contrib non-free
-    deb http://deb.debian.org/debian           bullseye-updates main contrib non-free
-    
-    sudo apt update & sudo apt upgrade & sudo apt dist-upgrade
-    
+```
+deb http://deb.debian.org/debian           bullseye          main contrib non-free
+deb http://deb.debian.org/debian-security/ bullseye-security main contrib non-free
+deb http://deb.debian.org/debian           bullseye-updates  main contrib non-free
+```
+
+Then run the typical upgrade of Debian:
+```
+sudo apt update & sudo apt upgrade & sudo apt dist-upgrade
+```
+
 - Install [Podman](https://podman.io/getting-started/installation) v3.3.1 (Debian repository does not work correctly in my case).
 
 ## Create the image (it will take around 1-2 hours)
