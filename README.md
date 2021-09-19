@@ -21,7 +21,7 @@ sudo apt update & sudo apt upgrade & sudo apt dist-upgrade
 
 ## Create the image (it will take around 1-2 hours)
 
-    podman build -f Valheim.dockerfile
+    podman build -f valheim.Dockerfile
     podman 
         
 ## Execute the container
