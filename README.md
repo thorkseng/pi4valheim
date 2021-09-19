@@ -22,12 +22,12 @@ sudo apt update & sudo apt upgrade & sudo apt dist-upgrade
 ## Create the image (it will take around 1-2 hours)
 
     podman build -f valheim.Dockerfile
-    podman 
+    podman image tag c44a18e4e67d valheim-base:v1
         
 ## Execute the container
 In my case, I have my world from previous server in /home/pi/valheim_data.
 
-    podman run --name valheim --network host -v /home/pi/valheim_data:/root/valheim_data:rw -it valheim-base /bin/bash
+    podman run --name valheim --network host -v /home/pi/valheim_data:/root/valheim_data:rw -it valheim-base:v1 /bin/bash
     
 Create a start.sh copy from the start_server.sh and modify the execution with box64 in front
 For example I execute my server with the next line to create a local network server to play at home.
