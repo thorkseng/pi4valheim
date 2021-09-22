@@ -17,7 +17,7 @@ Then run the typical upgrade of Debian:
 sudo apt update & sudo apt upgrade & sudo apt dist-upgrade
 ```
 
-- Install [Podman](https://podman.io/getting-started/installation) v3.3.1 (Debian repository does not work correctly in my case).
+- Install [Podman](https://podman.io/getting-started/installation) v3.3.1 (The version that is in the Debian repository is old (3.0.1) and it does not work correctly in my case).
 
 ## Create the image (it will take around 1-2 hours)
 
