@@ -40,4 +40,6 @@ RUN cmake .. -DRPI4ARM64=1 -DCMAKE_BUILD_TYPE=RelWithDebInfo
 RUN make -j4; 
 RUN make install
 
+EXPOSE 2456-2458/udp
+
 CMD ["/bin/bash"]
