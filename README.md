@@ -25,7 +25,9 @@ sudo apt update & sudo apt upgrade & sudo apt dist-upgrade
     podman image tag c44a18e4e67d valheim-base:v1
         
 ## Execute the container
-In my case, I have my world from previous server in /home/pi/valheim_data. If you don't have the CNI network configured, you can use this command to execute the container.
+
+### First step is to execute the container, it can be done in two ways depending of the networking configuration:
+If you don't have the CNI network configured, you can use this command to execute the container.
 
     podman run --name valheim --network host -v /home/pi/valheim_data:/root/valheim_data:rw -it valheim-base:v1 /bin/bash
     
@@ -33,14 +35,30 @@ If you have the CNI network configured you can use this command to execute the c
 
     podman run --rm --name valheim --network cni-podman1 -p 2456-2458:2456-2458/udp -v /home/pi/valheim_data:/root/valheim_data:rw -it valheim-base /bin/bash
     
-Create a start.sh copy from the start_server.sh and modify the execution with box64 in front
+### Second step: 
+Create a start.sh copy from the start_server.sh and modify the execution with box64 in front.
 For example I execute my server with the next line to create a local network server to play at home.
+Also, as I had a previous world created, I connected it with a volumne in the execution of the container, so you can use "-savedir" to point to the world data:
+    
+    nano start_server.sh
+
+Modify the line of the execution of the server with your properties:
     
     box64 ./valheim_server.x86_64 -public 0 -nographics -batchmode -name "Your server Name" -port 2456 -world "Your Workd Name" -savedir "/root/valheim_data"
-    
+   
+Then, use Control + S and Control + X to save and exit the file
+
+### Third step
+Start the server with the command:
+
+    ./start_server.sh
+
+### Fourth step: 
+Stop the server with control + c as a the normal Valheim server.
+
 ## Considerations:
 Pi4 has a limited hardware, it this is emulating x86_64 over arm64, so don't expect so high performance. It works, I didn't have any problems playing some hours.
-When the game saves it freeze all connections during some seconds, take it into account!!!!!
+When the game saves it freeze all connections during some seconds, take it into account!!!!! Several times it does not start correctly and fail (the emulator is not yet finished and it does not work all the times). In that cases, you need to stop the process killing the process.
 
 ## This experiment can be done for the next projects:
 - [podman](podman.io)
