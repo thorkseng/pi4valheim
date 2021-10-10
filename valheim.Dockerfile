@@ -30,6 +30,7 @@ RUN make install
 WORKDIR /root/steam
 RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
 ENV DEBUGGER "/usr/local/bin/box86"
+ENV BOX86_DYNAREC "0"
 RUN ./steamcmd.sh +@sSteamCmdForcePlatformType linux +login anonymous +force_install_dir /root/valheim_server +app_update 896660 validate +quit
 
 ## Box64 installation
