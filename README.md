@@ -21,11 +21,18 @@ sudo apt update & sudo apt upgrade & sudo apt dist-upgrade
 ```
 
 - Install [Podman](https://podman.io/getting-started/installation) v3.3.1 (The version that is in the Debian repository is old (3.0.1) and it does not work correctly in my case).
+- Install [Docker](https://docs.docker.com/engine/install/debian/) (Tested on version 20.10.9)
 
 ## Create the image (it will take around 1-2 hours)
 
+If you use podman: 
+
     podman build -f valheim.Dockerfile
     podman image tag c44a18e4e67d valheim-base:v1
+
+If you use docker:
+
+    docker build --no-cache --tag valheim-base -f Valheim.dockerfile .
         
 ## Execute the container
 
@@ -37,7 +44,11 @@ If you don't have the CNI network configured, you can use this command to execut
 If you have the CNI network configured you can use this command to execute the container:
 
     podman run --rm --name valheim --network cni-podman1 -p 2456-2458:2456-2458/udp -v /home/pi/valheim_data:/root/valheim_data:rw -it valheim-base /bin/bash
-    
+   
+If you use docker (I didn't test with cni network): 
+
+    docker run --rm --name valheim --network host -v /home/pi/valheim_data:/root/valheim_data:rw -it valheim-base /bin/bash
+
 ### Second step: 
 Create a start.sh copy from the start_server.sh and modify the execution with box64 in front.
 For example I execute my server with the next line to create a local network server to play at home.
@@ -65,5 +76,6 @@ When the game saves it freeze all connections during some seconds, take it into 
 
 ## This experiment can be done for the next projects:
 - [podman](podman.io)
+- [docker](docker.com)
 - [box86](https://github.com/ptitSeb/box86)
 - [box64](https://github.com/ptitSeb/box64)
