@@ -53,7 +53,8 @@ This values are the real ones for yoru server:
     NAME=YourServerName             # Your amazing name of your server.
     WORLD=YourWorldName             # Your unique name of your world.
     SAVEDIR=/root/valheim_data      # Where to save your data.
-    PASSWORD=YourUniquePassw0rd     # You can leave blank and it will not have password, not recommended for public servers.
+    PASSWORD=YourUniquePassw0rd     # You can leave blank and it will not have password
+                                    # NOT recommended for public servers.
 
 ### Second step, run the container (example with Docker):
 
