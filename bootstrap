@@ -72,7 +72,7 @@ main() {
     echo "Final Valheim parameters to run: $params"
 
     # Starting the server:
-    box64 /root/valheim_server/valheim_server.x86_64 $params
+    box64 ./valheim_server.x86_64 $params
 }
 
 getparams
