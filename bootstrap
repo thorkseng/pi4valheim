@@ -1,0 +1,79 @@
+#!/bin/bash
+
+# Get parameters function
+# This function will check all the parameters 
+# Return:
+#   string: params to run the server
+#   int: -1 is something is wrong.
+
+getparams() {
+    # Basic + default params values:
+    #   -nographics: basic param for the valheim documentation. MANDATORY.
+    #   -batchmode: bacic param for the valheim documentation. MANDATORY.
+    #   -public: used the value of the param if defined, if not it will be a private server (0) MANDATORY.
+    #   -port: used the value of the param if defined, if not it will use standard port (2456) MANDATORY.
+    params="-nographics -batchmode"
+    params="$params -public ${PUBLIC:-0}"
+    params="$params -port ${PORT:-2456}"
+
+    # Specific params values, if they are not defined, return error:
+    ## Name of the server MANDATORY:
+    if [[ -z "${NAME}" ]]; then
+        echo "The variable NAME is not defined. Please, fix and run again."
+        return -1
+    else
+        params="$params -name ${NAME}"
+    fi
+
+    ## Name of the world MANDATORY
+    if [[ -z "${WORLD}" ]]; then
+        echo "The variable WORLD is not defined. Fixed and run again."
+        return -1
+    else
+        params="$params -world ${WORLD}"
+    fi
+
+    ## Save folder for the data (if not defined can run, but the world will be saved on the container, bad idea):
+    if [[ -z "${SAVEDIR}" ]]; then
+        echo "The variable SAVEDIR is not defined. Fixed and run again."
+        return -1
+    else
+        params="$params -savedir ${SAVEDIR}"
+    fi
+
+    ## Password for the server, if not defined, no password = free access:
+    if [[ -z "${PASSWORD}" ]]; then
+        echo "The variable PASSWORD is not defined. Running WITHOUT password."
+    else
+        params="$params -password ${PASSWORD}"
+    fi
+
+    ## Checking the final parameters to use:
+    echo "Final Valheim parameters to run: $params"
+}
+
+# Main function
+main($params) {
+    # Basic export for the BOX64 emulator
+    echo "##############################"
+    echo "Basic variables running box64:"
+    echo "BOX64_LD_LIBRARY_PATH: ${BOX64_LD_LIBRARY_PATH}"
+    echo "BOX64_LOG: ${BOX64_LOG}"
+    echo "BOX64_TRACE_FILE: ${BOX64_TRACE_FILE}"
+    echo "BOX64_TRACE: ${BOX64_TRACE}"
+    echo "##############################"
+
+    # Part of the standar code startup of the server:
+    export templdpath="${LD_LIBRARY_PATH}"
+    export LD_LIBRARY_PATH=./linux64:"${LD_LIBRARY_PATH}"
+    export SteamAppId=${STEAMAPPID}
+    
+    # Move to the execution folder
+    cd /root/valheim_server
+
+    # Starting the server:
+    box64 ./valheim_server.x86_64 $params
+}
+
+$params=getparams
+main(params)
