@@ -47,13 +47,10 @@ getparams() {
     else
         params="$params -password ${PASSWORD}"
     fi
-
-    ## Checking the final parameters to use:
-    echo "Final Valheim parameters to run: $params"
 }
 
 # Main function
-main($params) {
+main() {
     # Basic export for the BOX64 emulator
     echo "##############################"
     echo "Basic variables running box64:"
@@ -71,9 +68,12 @@ main($params) {
     # Move to the execution folder
     cd /root/valheim_server
 
+    ## Checking the final parameters to use:
+    echo "Final Valheim parameters to run: $params"
+
     # Starting the server:
-    box64 ./valheim_server.x86_64 $params
+    box64 ./valheim_server.x86_64 $1
 }
 
-$params=getparams
-main(params)
+getparams
+main $params
