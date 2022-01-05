@@ -46,8 +46,8 @@ RUN make install
 
 # Cleaning the image
 RUN apt-get purge -y wget
-RUN rm -r box86
-RUN rm -r box64
+RUN rm -r /root/box86
+RUN rm -r /root/box64
 
 # Specific for run Valheim server
 EXPOSE 2456-2457/udp
