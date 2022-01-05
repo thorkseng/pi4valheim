@@ -44,9 +44,13 @@ RUN cmake .. -DRPI4ARM64=1 -DCMAKE_BUILD_TYPE=RelWithDebInfo
 RUN make -j4; 
 RUN make install
 
-EXPOSE 2456-2457/udp
+# Cleaning the image
+RUN apt-get purge -y wget
+RUN rm -r a-build-dir
+RUN apt-get purge -y a-package
 
+# Specific for run Valheim server
+EXPOSE 2456-2457/udp
 WORKDIR /root/
 COPY bootstrap .
-
 CMD ["/root/bootstrap"]
