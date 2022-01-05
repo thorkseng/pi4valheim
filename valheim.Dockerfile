@@ -46,11 +46,11 @@ RUN make install
 
 # Cleaning the image
 RUN apt-get purge -y wget
-RUN rm -r a-build-dir
-RUN apt-get purge -y a-package
+RUN rm -r box86
+RUN rm -r box64
 
 # Specific for run Valheim server
 EXPOSE 2456-2457/udp
-WORKDIR /root/
+WORKDIR /root
 COPY bootstrap .
 CMD ["/root/bootstrap"]
