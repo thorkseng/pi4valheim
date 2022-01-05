@@ -22,7 +22,7 @@ getparams() {
         echo "The variable NAME is not defined. Please, fix and run again."
         return -1
     else
-        params="$params -name \"${NAME}\""
+        params="$params -name ${NAME}"
     fi
 
     ## Name of the world MANDATORY
@@ -30,7 +30,7 @@ getparams() {
         echo "The variable WORLD is not defined. Fixed and run again."
         return -1
     else
-        params="$params -world \"${WORLD}\""
+        params="$params -world ${WORLD}"
     fi
 
     ## Save folder for the data (if not defined can run, but the world will be saved on the container, bad idea):
@@ -38,14 +38,14 @@ getparams() {
         echo "The variable SAVEDIR is not defined. Fixed and run again."
         return -1
     else
-        params="$params -savedir \"${SAVEDIR}\""
+        params="$params -savedir ${SAVEDIR}"
     fi
 
     ## Password for the server, if not defined, no password = free access:
     if [[ -z "${PASSWORD}" ]]; then
         echo "The variable PASSWORD is not defined. Running WITHOUT password."
     else
-        params="$params -password \"${PASSWORD}\""
+        params="$params -password ${PASSWORD}"
     fi
 }
 
@@ -69,7 +69,9 @@ main() {
     cd /root/valheim_server
 
     ## Checking the final parameters to use:
+    echo "##############################"
     echo "Final Valheim parameters to run: $params"
+    echo "##############################"
 
     # Starting the server:
     box64 ./valheim_server.x86_64 $params
