@@ -2,7 +2,9 @@
 Experimental Docker file to run a Valheim server in a Raspberry Pi4.
 
 The valheim.Dockerfile is based on the stardart repositories of box86 and box64.
-The valheim2.DockerFile is based on alternative repository of box64 with a fixed memory issue that appears on the startup of the server.
+
+## Compiled image:
+You can find in the docker hub the image to run directly: https://hub.docker.com/repository/docker/tranko/pi4valheim
 
 ## Requeriments:
 Raspberry Pi4: I only tested on a 8GB of RAM with the next requirements:
