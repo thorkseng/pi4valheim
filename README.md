@@ -60,7 +60,7 @@ This values are the real ones for yoru server:
 
 ### Second step, run the container (example with Docker):
 
-    docker run --rm --name valheim -p 2456-2457:2456-2457/udp -v /home/pi/ssd/valheim_data:/root/valheim_data:rw --env-file env.tardis valheim-base
+    docker run --rm --name valheim -p 2456-2457:2456-2457/udp -v /valheim_data:/root/valheim_data:rw --env-file env.world valheim-base
 
 ## Considerations:
 Pi4 has a limited hardware, it this is emulating x86_64 over arm64, so don't expect so high performance. It works, I didn't have any problems playing some hours.
