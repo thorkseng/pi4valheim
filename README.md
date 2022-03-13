@@ -66,7 +66,7 @@ This values are the real ones for yoru server:
 Pi4 has a limited hardware, it this is emulating x86_64 over arm64, so don't expect so high performance. It works, I didn't have any problems playing some hours.
 When the game saves it freeze all connections during some seconds, take it into account!!!!! Several times it does not start correctly and fail (the emulator is not yet finished and it does not work all the times). In that cases, you need to stop the process killing the process.
 
-## This experiment can be done for the next projects:
+## This experiment has been able to be done thanks to the following open source projects:
 - [box86](https://github.com/ptitSeb/box86)
 - [box64](https://github.com/ptitSeb/box64)
 - [docker](docker.com)
