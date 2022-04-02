@@ -32,7 +32,6 @@ RUN make install
 WORKDIR /root/steam
 RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
 # RUN export DEBUGGER="/usr/local/bin/box86"
-ENV BOX86_DYNAREC "0"
 ENV DEBUGGER "/usr/local/bin/box86"
 RUN ./steamcmd.sh +@sSteamCmdForcePlatformType linux +login anonymous +force_install_dir /root/valheim_server +app_update 896660 validate +quit
 
@@ -53,4 +52,4 @@ RUN rm -r /root/box64
 EXPOSE 2456-2457/udp
 WORKDIR /root
 COPY bootstrap .
-CMD ["/root/bootstrap"]
+CMD ["/bin/bash", "/root/bootstrap"]
