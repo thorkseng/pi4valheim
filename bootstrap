@@ -7,17 +7,13 @@
 #   int: -1 is something is wrong.
 
 getparams() {
-    # Basic + default params values:
-    #   -nographics: basic param for the valheim documentation. MANDATORY.
-    #   -batchmode: bacic param for the valheim documentation. MANDATORY.
-    #   -public: used the value of the param if defined, if not it will be a private server (0) MANDATORY.
-    #   -port: used the value of the param if defined, if not it will use standard port (2456) MANDATORY.
+    # Basic + default params values same order that PDF:
+    ##  -nographics: basic param for the valheim documentation.
+    ##  -batchmode: basic param for the valheim documentation.
     params="-nographics -batchmode"
-    params="$params -public ${PUBLIC:-0}"
-    params="$params -port ${PORT:-2456}"
 
-    # Specific params values, if they are not defined, return error:
-    ## Name of the server MANDATORY:
+    ## -name: Name of the server:
+    ## Enter the name of your server that will be visible in the Server list.
     if [[ -z "${NAME}" ]]; then
         echo "The variable NAME is not defined. Please, fix and run again."
         return -1
@@ -25,7 +21,15 @@ getparams() {
         params="$params -name ${NAME}"
     fi
 
-    ## Name of the world MANDATORY
+    ##  -port: used the value of the param if defined, if not it will use standard port (2456).
+    ##  Choose the Port which you want the server to communicate with. Please note that this has to 
+    ##  correspond with the Port Forwarding settings on your Router. Valheim uses the specified Port AND 
+    ##  specified Port+1. Default Ports are 2456-2457
+    params="$params -port ${PORT:-2456}"
+
+    ##  -world: Name of the world
+    ##  A World with the name entered will be created. 
+    ##  You may also choose an already existing World by entering its name
     if [[ -z "${WORLD}" ]]; then
         echo "The variable WORLD is not defined. Fixed and run again."
         return -1
@@ -33,7 +37,16 @@ getparams() {
         params="$params -world ${WORLD}"
     fi
 
-    ## Save folder for the data (if not defined can run, but the world will be saved on the container, bad idea):
+    ## -password: Password for the server, if not defined, no password = free access:
+    if [[ -z "${PASSWORD}" ]]; then
+        echo "The variable PASSWORD is not defined. Running WITHOUT password."
+    else
+        params="$params -password ${PASSWORD}"
+    fi
+
+    ##  -savedir: Where the data will be saved.
+    ##  Overrides the default save path where Worlds and permission-files are stored.
+    Save folder for the data (if not defined can run, but the world will be saved on the container, bad idea):
     if [[ -z "${SAVEDIR}" ]]; then
         echo "The variable SAVEDIR is not defined. Fixed and run again."
         return -1
@@ -41,12 +54,32 @@ getparams() {
         params="$params -savedir ${SAVEDIR}"
     fi
 
-    ## Password for the server, if not defined, no password = free access:
-    if [[ -z "${PASSWORD}" ]]; then
-        echo "The variable PASSWORD is not defined. Running WITHOUT password."
-    else
-        params="$params -password ${PASSWORD}"
-    fi
+    ##  -public: used the value of the param if defined, if not it will be a public server (1).
+    ##  Sets the visibility of your server. 1 is default and will make the server visible in the browser.
+    ##  Set it to 0 to make the server invisible and only joinable via the ‘Join IP’-button.
+    ##  Setting public to 0 is a good option if you wish to run a local LAN server, where players can join via
+    ##  the local IP of the server.
+    params="$params -public ${PUBLIC:-1}"
+
+    ##  -logFile: Sets the location to save the log file.
+    defaultLogFile="/root/valheim_data/log.txt"
+    params="$params -logFile ${LOGFILE:-$defaultLogFile}"
+
+    ##  -saveinterval: Change how often the world will save in seconds.
+    params="$params -saveinterval ${SAVEINTERVAL:-1800}"
+
+    ##  -backups: Sets how many automatic backups will be kept. 
+    ##  The first is the ‘short’ backup length, and the rest are the ‘long’ backup length.
+    ##  By default that means one backup that is 2 hours old, and 3 backups that are 12 hours apart.
+    params="$params -backups ${BACKUPS:-4}"
+
+    ##  -backupshort: Sets the interval between the first automatic backups.
+    ##  Default is 2 hours (7200 seconds).
+    params="$params -backupshort ${SAVEINTERVAL:-7200}"
+
+    ##  -backuplong: Sets the interval between the subsequent automatic backups.
+    ##  Default is 12 hours (43200 seconds).
+    params="$params -backuplong ${SAVEINTERVAL:-43200}"
 }
 
 # Main function
