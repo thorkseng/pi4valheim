@@ -46,7 +46,7 @@ getparams() {
 
     ##  -savedir: Where the data will be saved.
     ##  Overrides the default save path where Worlds and permission-files are stored.
-    Save folder for the data (if not defined can run, but the world will be saved on the container, bad idea):
+    ##  Save folder for the data (if not defined can run, but the world will be saved on the container, bad idea):
     if [[ -z "${SAVEDIR}" ]]; then
         echo "The variable SAVEDIR is not defined. Fixed and run again."
         return -1
