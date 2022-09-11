@@ -62,8 +62,11 @@ getparams() {
     params="$params -public ${PUBLIC:-1}"
 
     ##  -logFile: Sets the location to save the log file.
-    defaultLogFile="/root/valheim_data/log.txt"
-    params="$params -logFile ${LOGFILE:-$defaultLogFile}"
+    if [[ -z "${LOGFILE}" ]]; then
+        echo "The variable LOGFILE is not defined. The messages will be displayed on standard output."
+    else
+        params="$params -logFile ${LOGFILE}"
+    fi
 
     ##  -saveinterval: Change how often the world will save in seconds.
     params="$params -saveinterval ${SAVEINTERVAL:-1800}"
