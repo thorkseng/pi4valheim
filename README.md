@@ -4,6 +4,7 @@ Experimental Docker file to run a Valheim server in a Raspberry Pi4.
 The valheim.Dockerfile is based on the stardart repositories of box86 and box64.
 
 ## Changelog
+2022.10.02: updated with new version of Valheim (0.211.7) with the crossplay parameter.
 2022.09.10: updated with the new commands of the version 0.210.6
 
 ## Compiled image:
