@@ -6,6 +6,7 @@ The valheim.Dockerfile is based on the stardart repositories of box86 and box64.
 ## Changelog
 2022.10.02: updated with new version of Valheim (0.211.7) with the crossplay parameter.  
 2022.10.05: tested with the new version 0.211.8 (no other changes)  
+2022.10.13: tested with the new version 0.211.9 (no other changes)  
 
 ## Compiled image:
 You can find in the docker hub the image to run directly: https://hub.docker.com/repository/docker/tranko/pi4valheim
