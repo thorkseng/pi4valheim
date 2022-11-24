@@ -7,7 +7,8 @@ The valheim.Dockerfile is based on the stardart repositories of box86 and box64.
 2022.10.02: updated with new version of Valheim (0.211.7) with the crossplay parameter.  
 2022.10.05: tested with the new version 0.211.8 (no other changes)  
 2022.10.13: tested with the new version 0.211.9 (no other changes)  
-2022.11.29: tested with the new version 0.211.11 (no other changes)  
+2022.11.19: tested with the new version 0.211.11 (no other changes)  
+2022.11.24: added optimizer dockerfiel for ODROID N2/N2+ (thanks rstrube)  
 
 ## Compiled image:
 You can find in the docker hub the image to run directly: https://hub.docker.com/repository/docker/tranko/pi4valheim
@@ -32,6 +33,7 @@ sudo apt update & sudo apt upgrade & sudo apt dist-upgrade
 - Install [Docker](https://docs.docker.com/engine/install/debian/) (Tested on version 20.10.9)
 
 ## Create the image (it will take around 1-2 hours)
+### If you have a Raspberry Pi4
 
 If you use podman: 
 
@@ -41,7 +43,18 @@ If you use podman:
 If you use docker:
 
     docker build --no-cache --tag valheim-base -f Valheim.dockerfile .
-        
+
+## if you have a ODROID N2/N2+
+
+If you use podman: 
+
+    podman build -f valheim.dodroidn2.Dockerfile
+    podman image tag c44a18e4e67d valheim-base:v1
+
+If you use docker:
+
+    docker build --no-cache --tag valheim-base -f valheim.dodroidn2.Dockerfile .
+
 ## Execute the container
 
 ### First step configure the env.world file:
