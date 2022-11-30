@@ -21,8 +21,9 @@ RUN apt install -y \
     libstdc++6:armhf
 
 # Install the box86 to emulate x86 platform (for steamcmd cliente)
+ARG box86_release=v0.2.8
 WORKDIR /root
-RUN git clone https://github.com/ptitSeb/box86
+RUN git clone https://github.com/ptitSeb/box86 --branch $box86_release
 WORKDIR /root/box86/build
 RUN cmake .. -DODROIDN2=ON -DCMAKE_BUILD_TYPE=RelWithDebInfo
 RUN make -j6;
@@ -31,13 +32,13 @@ RUN make install
 # Install steamcmd and download the valheim server:
 WORKDIR /root/steam
 RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
-# RUN export DEBUGGER="/usr/local/bin/box86"
 ENV DEBUGGER "/usr/local/bin/box86"
 RUN ./steamcmd.sh +@sSteamCmdForcePlatformType linux +login anonymous +force_install_dir /root/valheim_server +app_update 896660 validate +quit
 
 ## Box64 installation
+ARG box64_release=v0.2.0
 WORKDIR /root
-RUN git clone https://github.com/ptitSeb/box64
+RUN git clone https://github.com/ptitSeb/box64 --branch $box64_release
 WORKDIR /root/box64/build
 RUN cmake .. -DODROIDN2=ON -DCMAKE_BUILD_TYPE=RelWithDebInfo
 RUN make -j6;
