@@ -9,6 +9,7 @@ The valheim.Dockerfile is based on the stardart repositories of box86 and box64.
 2022.10.13: tested with the new version 0.211.9 (no other changes)  
 2022.11.19: tested with the new version 0.211.11 (no other changes)  
 2022.11.24: added optimizer dockerfiel for ODROID N2/N2+ (thanks rstrube)  
+2022.11.30: now the docker file only downloads the last "stable" releases of box86 and box64 instead the dev code from the main repository  
 
 ## Compiled image:
 You can find in the docker hub the image to run directly: https://hub.docker.com/repository/docker/tranko/pi4valheim
