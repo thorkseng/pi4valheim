@@ -10,6 +10,7 @@ The valheim.Dockerfile is based on the stardart repositories of box86 and box64.
 2022.11.19: tested with the new version 0.211.11 (no other changes)  
 2022.11.24: added optimizer dockerfiel for ODROID N2/N2+ (thanks rstrube)  
 2022.11.30: now the docker file only downloads the last "stable" releases of box86 and box64 instead the dev code from the main repository  
+2022.12.19: removing podman from readme instructions
 
 ## Compiled image:
 You can find in the docker hub the image to run directly: https://hub.docker.com/repository/docker/tranko/pi4valheim
@@ -30,29 +31,14 @@ Then run the typical upgrade of Debian:
 sudo apt update & sudo apt upgrade & sudo apt dist-upgrade
 ```
 
-- Install [Podman](https://podman.io/getting-started/installation) v3.3.1 (The version that is in the Debian repository is old (3.0.1) and it does not work correctly in my case).
 - Install [Docker](https://docs.docker.com/engine/install/debian/) (Tested on version 20.10.9)
 
 ## Create the image (it will take around 1-2 hours)
 ### If you have a Raspberry Pi4
 
-If you use podman: 
-
-    podman build -f valheim.Dockerfile
-    podman image tag c44a18e4e67d valheim-base:v1
-
-If you use docker:
-
     docker build --no-cache --tag valheim-base -f Valheim.dockerfile .
 
 ## if you have a ODROID N2/N2+
-
-If you use podman: 
-
-    podman build -f valheim.dodroidn2.Dockerfile
-    podman image tag c44a18e4e67d valheim-base:v1
-
-If you use docker:
 
     docker build --no-cache --tag valheim-base -f valheim.dodroidn2.Dockerfile .
 
@@ -60,7 +46,7 @@ If you use docker:
 
 ### First step configure the env.world file:
 
-This values don't be changed. Only if they change in the future:
+This values shouldn't be changed. Only if they change in the future:
     
     STEAMAPPID=892970
     BOX64_LD_LIBRARY_PATH=./linux64:/root/steam/linux32:$BOX64_LD_LIBRARY_PATH
@@ -90,4 +76,3 @@ When the game saves it freeze all connections during some seconds, take it into 
 - [box86](https://github.com/ptitSeb/box86)
 - [box64](https://github.com/ptitSeb/box64)
 - [docker](docker.com)
-- [podman](podman.io)
