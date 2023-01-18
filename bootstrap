@@ -78,11 +78,11 @@ getparams() {
 
     ##  -backupshort: Sets the interval between the first automatic backups.
     ##  Default is 2 hours (7200 seconds).
-    params="$params -backupshort ${SAVEINTERVAL:-7200}"
+    params="$params -backupshort ${BACKUPSHORT:-7200}"
 
     ##  -backuplong: Sets the interval between the subsequent automatic backups.
     ##  Default is 12 hours (43200 seconds).
-    params="$params -backuplong ${SAVEINTERVAL:-43200}"
+    params="$params -backuplong ${BACKUPLONG:-43200}"
 
     ##  -crossplay: Runs the Server on the Crossplay backend (PlayFab), which lets users from any platform join.
     ##  If you do not include this argument (or set to FALSE in the env file), the Steam backend is used, which 
