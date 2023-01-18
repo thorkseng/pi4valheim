@@ -36,7 +36,7 @@ sudo apt update & sudo apt upgrade & sudo apt dist-upgrade
 ## Create the image (it will take around 1-2 hours)
 ### If you have a Raspberry Pi4
 
-    docker build --no-cache --tag valheim-base -f Valheim.dockerfile .
+    docker build --no-cache --tag valheim-base -f valheim.Dockerfile .
 
 ## if you have a ODROID N2/N2+
 
@@ -66,7 +66,7 @@ This values are the real ones for yoru server:
 
 ### Second step, run the container (example with Docker):
 
-    docker run --rm --name valheim -p 2456-2457:2456-2457/udp -v /valheim_data:/root/valheim_data:rw --env-file env.world valheim-base
+    docker run --rm --stop-signal SIGINT --stop-timeout 100 --name valheim -p 2456-2457:2456-2457/udp -v /valheim_data:/root/valheim_data:rw --env-file env.world valheim-base
 
 ## Considerations:
 Pi4 has a limited hardware, it this is emulating x86_64 over arm64, so don't expect so high performance. It works, I didn't have any problems playing some hours.
