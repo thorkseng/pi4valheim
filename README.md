@@ -13,7 +13,7 @@ The valheim.Dockerfile is based on the stardart repositories of box86 and box64.
 2022.12.19: removing podman from readme instructions
 
 ## Compiled image:
-You can find in the docker hub the image to run directly: https://hub.docker.com/repository/docker/tranko/pi4valheim
+You can find in the docker hub the image to run directly: [https://hub.docker.com/r/tranko/pi4valheim](https://hub.docker.com/r/tranko/pi4valheim)
 
 ## Requeriments:
 Raspberry Pi4: I only tested on a 8GB of RAM with the next requirements:
