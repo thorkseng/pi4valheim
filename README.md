@@ -54,7 +54,7 @@ This values shouldn't be changed. Only if they change in the future:
     BOX64_TRACE_FILE=/root/valheim_data/output.log
     BOX64_TRACE=1
     
-This values are the real ones for yoru server:    
+This values are the real ones for your server:    
     
     PUBLIC=0                        # 0 private / 1 public
     PORT=2456                       # Don't change if don't know what are you doing. 
