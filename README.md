@@ -13,7 +13,7 @@ The valheim.Dockerfile is based on the stardart repositories of box86 and box64.
 2022.12.19: removing podman from readme instructions
 
 ## Compiled image:
-You can find in the docker hub the image to run directly: https://hub.docker.com/repository/docker/tranko/pi4valheim
+You can find in the docker hub the image to run directly: [https://hub.docker.com/r/tranko/pi4valheim](https://hub.docker.com/r/tranko/pi4valheim)
 
 ## Requeriments:
 Raspberry Pi4: I only tested on a 8GB of RAM with the next requirements:
@@ -36,7 +36,7 @@ sudo apt update & sudo apt upgrade & sudo apt dist-upgrade
 ## Create the image (it will take around 1-2 hours)
 ### If you have a Raspberry Pi4
 
-    docker build --no-cache --tag valheim-base -f Valheim.dockerfile .
+    docker build --no-cache --tag valheim-base -f valheim.Dockerfile .
 
 ## if you have a ODROID N2/N2+
 
@@ -54,7 +54,7 @@ This values shouldn't be changed. Only if they change in the future:
     BOX64_TRACE_FILE=/root/valheim_data/output.log
     BOX64_TRACE=1
     
-This values are the real ones for yoru server:    
+This values are the real ones for your server:    
     
     PUBLIC=0                        # 0 private / 1 public
     PORT=2456                       # Don't change if don't know what are you doing. 
@@ -66,7 +66,7 @@ This values are the real ones for yoru server:
 
 ### Second step, run the container (example with Docker):
 
-    docker run --rm --name valheim -p 2456-2457:2456-2457/udp -v /valheim_data:/root/valheim_data:rw --env-file env.world valheim-base
+    docker run --rm --stop-signal SIGINT --stop-timeout 100 --name valheim -p 2456-2457:2456-2457/udp -v /valheim_data:/root/valheim_data:rw --env-file env.world valheim-base
 
 ## Considerations:
 Pi4 has a limited hardware, it this is emulating x86_64 over arm64, so don't expect so high performance. It works, I didn't have any problems playing some hours.
