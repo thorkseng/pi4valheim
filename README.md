@@ -11,9 +11,11 @@ The valheim.Dockerfile is based on the stardart repositories of box86 and box64.
 2022.11.24: added optimizer dockerfiel for ODROID N2/N2+ (thanks rstrube)  
 2022.11.30: now the docker file only downloads the last "stable" releases of box86 and box64 instead the dev code from the main repository  
 2022.12.19: removing podman from readme instructions
+2023.04.06: tested with version 0.214.300 but only dev dockerfiles works fine.
 
 ## Compiled image:
 You can find in the docker hub the image to run directly: [https://hub.docker.com/r/tranko/pi4valheim](https://hub.docker.com/r/tranko/pi4valheim)
+Note: for the version 0.214.300 only the image tagged as 0.214.300.dev works for now until box64 has a new release with new commits.
 
 ## Requeriments:
 Raspberry Pi4: I only tested on a 8GB of RAM with the next requirements:
